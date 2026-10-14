@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { drawScene, noteBounds } from './render'
+import { uid } from './uid'
 import type { Anno, AnnoType, Doc, GuideLayer, PhotoFilter, Selection, Tool } from './types'
 
 interface View {
@@ -250,7 +251,7 @@ export default function Stage(p: Props) {
     }
     if (p.tool !== 'select') {
       p.onBeginEdit()
-      const id = crypto.randomUUID()
+      const id = uid()
       const type = p.tool as AnnoType
       const a: Anno = {
         id,

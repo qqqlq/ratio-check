@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import GuideThumb from './GuideThumb'
 import Stage from './Stage'
+import { uid } from './uid'
 import { GEN_GUIDES, PNG_GUIDES } from './guides'
 import type { CatalogItem } from './guides'
 import { drawScene, loadImage } from './render'
@@ -128,7 +129,7 @@ export default function App() {
         }
       }
       const layer: GuideLayer = {
-        id: crypto.randomUUID(),
+        id: uid(),
         name: item.name,
         source: item.source,
         cx: size.w / 2,
@@ -166,7 +167,7 @@ export default function App() {
   const duplicate = useCallback(() => {
     if (!selection) return
     const off = Math.max(size.w, size.h) * 0.02
-    const id = crypto.randomUUID()
+    const id = uid()
     record()
     if (selection.kind === 'layer') {
       setDoc((d) => {
